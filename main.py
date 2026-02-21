@@ -3,6 +3,9 @@ import aiohttp
 import json
 import re
 import os
+from fastapi import FastAPI, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -113,6 +116,70 @@ async def run_demo(audio_file: str):
     print("Parsed Response:", parsed_resp)
 
 
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.post("/api/analyze")
+async def analyze_audio(file: UploadFile = File(...)):
+    file_path = f"temp_{file.filename}"
+    with open(file_path, "wb") as buffer:
+        buffer.write(await file.read())
+    
+    stt_result = await get_modulate_stt(file_path)
+    
+    utterances = stt_result.get("utterances", [])
+
+    utterance_data = {
+        "conversation_history": [{"speaker": "Rep", "text": "Our platform starts at $18,000 annually."}, {"speaker": "Prospect", "text": "That is just too much. We are a 200-person company, not an enterprise."}], "latest_utterance": utterances
+    }
+
+    agent_resp = await call_airia(utterance_data)
+
+    parsed_resp = parse_airia_response(agent_resp)
+    
+    return parsed_resp
+
+
+
+@app.get("/api/demo")
+async def demo_analyze():
+    """Demo endpoint: processes pre-saved test-rec.mp3 through Modulate STT + Airia coaching pipeline."""
+    audio_file = "test-rec.mp3"
+
+    if not os.path.exists(audio_file):
+        return {"error": f"{audio_file} not found in backend working directory"}
+
+    stt_result = await get_modulate_stt(audio_file)
+    if not stt_result:
+        return {"error": "Failed to get transcription from Modulate"}
+
+    utterances = stt_result.get("utterances", [])
+
+    utterance_data = {
+        "conversation_history": [
+            {"speaker": "Rep", "text": "Our platform starts at $18,000 annually."},
+            {"speaker": "Prospect", "text": "That is just too much. We are a 200-person company, not an enterprise."}
+        ],
+        "latest_utterance": utterances
+    }
+
+    agent_resp = await call_airia(utterance_data)
+    parsed_resp = parse_airia_response(agent_resp) if agent_resp else None
+
+    return {
+        "transcripts": utterances,
+        "coaching": parsed_resp
+    }
+
+
 if __name__ == "__main__":
     # Simulate a run with your test audio
-    asyncio.run(run_demo("test-rec.mp3"))
+    # asyncio.run(run_demo("test-rec.mp3"))
+
+    uvicorn.run(app, host="0.0.0.0", port=8001)
