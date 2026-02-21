@@ -10,16 +10,16 @@ function MetricCard({ label, value, color, icon }) {
   return (
     <div style={{
       background: "rgba(15,23,42,0.6)", borderRadius: 12,
-      border: `1px solid ${color}25`, padding: "16px 20px",
-      display: "flex", flexDirection: "column", gap: 6, flex: 1, minWidth: 140,
+      border: `1px solid ${color}25`, padding: "18px 22px",
+      display: "flex", flexDirection: "column", gap: 8, flex: 1, minWidth: 150,
     }}>
       <div style={{
-        fontSize: 10, fontWeight: 700, color: "#64748b", letterSpacing: "0.08em",
+        fontSize: 13, fontWeight: 700, color: "#64748b", letterSpacing: "0.08em",
         fontFamily: "'IBM Plex Mono', monospace", textTransform: "uppercase",
       }}>
         {icon && <span style={{ marginRight: 6 }}>{icon}</span>}{label}
       </div>
-      <div style={{ fontSize: 18, fontWeight: 700, color, letterSpacing: "-0.01em" }}>
+      <div style={{ fontSize: 22, fontWeight: 700, color, letterSpacing: "-0.01em" }}>
         {value}
       </div>
     </div>
@@ -33,18 +33,18 @@ function SectionCard({ title, icon, color, children }) {
       border: "1px solid rgba(51,65,85,0.35)", overflow: "hidden",
     }}>
       <div style={{
-        padding: "12px 18px", borderBottom: "1px solid rgba(51,65,85,0.25)",
-        display: "flex", alignItems: "center", gap: 8,
+        padding: "14px 20px", borderBottom: "1px solid rgba(51,65,85,0.25)",
+        display: "flex", alignItems: "center", gap: 10,
       }}>
-        {icon && <span style={{ fontSize: 14 }}>{icon}</span>}
+        {icon && <span style={{ fontSize: 17 }}>{icon}</span>}
         <span style={{
-          fontSize: 11, fontWeight: 700, color: color || "#94a3b8",
+          fontSize: 14, fontWeight: 700, color: color || "#94a3b8",
           letterSpacing: "0.06em", fontFamily: "'IBM Plex Mono', monospace",
         }}>
           {title}
         </span>
       </div>
-      <div style={{ padding: "14px 18px" }}>{children}</div>
+      <div style={{ padding: "16px 20px" }}>{children}</div>
     </div>
   );
 }
@@ -59,7 +59,7 @@ function BulletList({ items, color = "#cbd5e1", bulletColor }) {
             width: 6, height: 6, borderRadius: "50%", flexShrink: 0, marginTop: 7,
             background: bulletColor || color,
           }} />
-          <div style={{ fontSize: 13, color, lineHeight: 1.6 }}>{item}</div>
+          <div style={{ fontSize: 16, color, lineHeight: 1.7 }}>{item}</div>
         </div>
       ))}
     </div>
@@ -69,19 +69,19 @@ function BulletList({ items, color = "#cbd5e1", bulletColor }) {
 function NumberedList({ items, color = "#cbd5e1", accentColor = "#06b6d4" }) {
   if (!items || items.length === 0) return <EmptyState />;
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
       {items.map((item, i) => (
-        <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+        <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
           <div style={{
-            width: 24, height: 24, borderRadius: 8, flexShrink: 0,
+            width: 28, height: 28, borderRadius: 8, flexShrink: 0,
             background: `${accentColor}15`, border: `1px solid ${accentColor}30`,
             display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: 11, fontWeight: 700, color: accentColor,
+            fontSize: 14, fontWeight: 700, color: accentColor,
             fontFamily: "'IBM Plex Mono', monospace",
           }}>
             {i + 1}
           </div>
-          <div style={{ fontSize: 13, color, lineHeight: 1.6, paddingTop: 2 }}>{item}</div>
+          <div style={{ fontSize: 16, color, lineHeight: 1.7, paddingTop: 3 }}>{item}</div>
         </div>
       ))}
     </div>
@@ -89,7 +89,7 @@ function NumberedList({ items, color = "#cbd5e1", accentColor = "#06b6d4" }) {
 }
 
 function EmptyState() {
-  return <div style={{ fontSize: 13, color: "#475569", fontStyle: "italic" }}>No data available</div>;
+  return <div style={{ fontSize: 16, color: "#475569", fontStyle: "italic" }}>No data available</div>;
 }
 
 function ScoreGauge({ score, label }) {
@@ -120,12 +120,12 @@ function ScoreGauge({ score, label }) {
       </svg>
       <div>
         <div style={{
-          fontSize: 10, fontWeight: 700, color: "#64748b", letterSpacing: "0.08em",
+          fontSize: 13, fontWeight: 700, color: "#64748b", letterSpacing: "0.08em",
           fontFamily: "'IBM Plex Mono', monospace", textTransform: "uppercase",
         }}>
           {label}
         </div>
-        <div style={{ fontSize: 13, color: "#94a3b8", marginTop: 2 }}>
+        <div style={{ fontSize: 15, color: "#94a3b8", marginTop: 2 }}>
           {pct >= 70 ? "Strong" : pct >= 40 ? "Needs Work" : "Critical"}
         </div>
       </div>
@@ -151,13 +151,13 @@ function OutcomeBadge({ outcome }) {
       </div>
       <div>
         <div style={{
-          fontSize: 10, fontWeight: 700, color: "#64748b", letterSpacing: "0.08em",
+          fontSize: 13, fontWeight: 700, color: "#64748b", letterSpacing: "0.08em",
           fontFamily: "'IBM Plex Mono', monospace",
         }}>
           OUTCOME
         </div>
         <div style={{
-          fontSize: 16, fontWeight: 700, color, letterSpacing: "0.02em", textTransform: "uppercase",
+          fontSize: 20, fontWeight: 700, color, letterSpacing: "0.02em", textTransform: "uppercase",
         }}>
           {outcome || "Unknown"}
         </div>
@@ -255,8 +255,8 @@ export default function PostSalesDashboard() {
           onClick={fetchAnalysis}
           disabled={loading}
           style={{
-            padding: "8px 20px", borderRadius: 8, border: "none",
-            fontWeight: 600, fontSize: 13, cursor: loading ? "wait" : "pointer",
+            padding: "10px 24px", borderRadius: 8, border: "none",
+            fontWeight: 600, fontSize: 15, cursor: loading ? "wait" : "pointer",
             fontFamily: "'DM Sans', sans-serif", transition: "all 0.2s ease",
             background: loading ? "rgba(100,116,139,0.2)" : "linear-gradient(135deg, #06b6d4, #0891b2)",
             color: loading ? "#64748b" : "#0f172a",
@@ -284,8 +284,8 @@ export default function PostSalesDashboard() {
             justifyContent: "center", height: "100%", gap: 16, opacity: 0.5,
           }}>
             <div style={{ fontSize: 56 }}>📊</div>
-            <div style={{ fontSize: 20, fontWeight: 600, color: "#64748b" }}>Post-Call Analysis</div>
-            <div style={{ fontSize: 13, color: "#475569", maxWidth: 380, textAlign: "center", lineHeight: 1.6 }}>
+            <div style={{ fontSize: 24, fontWeight: 600, color: "#64748b" }}>Post-Call Analysis</div>
+            <div style={{ fontSize: 16, color: "#475569", maxWidth: 420, textAlign: "center", lineHeight: 1.6 }}>
               Click <strong style={{ color: "#06b6d4" }}>Generate Analysis</strong> to run the Airia post-sales analysis pipeline on the last call
             </div>
           </div>
@@ -303,11 +303,11 @@ export default function PostSalesDashboard() {
               animation: "spin 1s linear infinite",
             }} />
             <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 16, fontWeight: 600, color: "#e2e8f0" }}>
+              <div style={{ fontSize: 20, fontWeight: 600, color: "#e2e8f0" }}>
                 Analyzing call with Airia
               </div>
               <div style={{
-                fontSize: 12, color: "#64748b", marginTop: 6,
+                fontSize: 14, color: "#64748b", marginTop: 6,
                 fontFamily: "'IBM Plex Mono', monospace",
               }}>
                 Mining rep insights, prospect patterns, and playbook recommendations...
@@ -323,8 +323,8 @@ export default function PostSalesDashboard() {
             justifyContent: "center", height: "100%", gap: 16,
           }}>
             <div style={{ fontSize: 48 }}>⚠️</div>
-            <div style={{ fontSize: 16, fontWeight: 600, color: "#ef4444" }}>Analysis Failed</div>
-            <div style={{ fontSize: 13, color: "#fca5a5", maxWidth: 440, textAlign: "center", lineHeight: 1.5 }}>
+            <div style={{ fontSize: 20, fontWeight: 600, color: "#ef4444" }}>Analysis Failed</div>
+            <div style={{ fontSize: 16, color: "#fca5a5", maxWidth: 440, textAlign: "center", lineHeight: 1.5 }}>
               {error}
             </div>
             <button
@@ -333,7 +333,7 @@ export default function PostSalesDashboard() {
                 marginTop: 8, padding: "8px 20px", borderRadius: 8,
                 background: "rgba(6,182,212,0.15)", color: "#06b6d4",
                 border: "1px solid rgba(6,182,212,0.3)",
-                fontWeight: 600, fontSize: 13, cursor: "pointer",
+                fontWeight: 600, fontSize: 15, cursor: "pointer",
                 fontFamily: "'DM Sans', sans-serif",
               }}
             >
@@ -360,7 +360,7 @@ export default function PostSalesDashboard() {
 
             {/* --- Call Summary --- */}
             <SectionCard title="CALL SUMMARY" icon="📋" color="#94a3b8">
-              <div style={{ fontSize: 14, color: "#cbd5e1", lineHeight: 1.7 }}>
+              <div style={{ fontSize: 17, color: "#cbd5e1", lineHeight: 1.7 }}>
                 {data.call_summary || "No summary available."}
               </div>
             </SectionCard>
@@ -394,7 +394,7 @@ export default function PostSalesDashboard() {
               {/* RIGHT: Prospect Insights */}
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 <SectionCard title="COMMUNICATION STYLE" icon="💬" color="#a78bfa">
-                  <div style={{ fontSize: 13, color: "#c4b5fd", lineHeight: 1.7 }}>
+                  <div style={{ fontSize: 16, color: "#c4b5fd", lineHeight: 1.7 }}>
                     {prospect?.communication_style || "No data available."}
                   </div>
                 </SectionCard>
