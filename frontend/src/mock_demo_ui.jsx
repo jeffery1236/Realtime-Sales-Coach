@@ -203,7 +203,7 @@ function ParticipantCard({ name, role, emotion, isSpeaking, isProspect }) {
           borderRadius: 20, border: "1px solid rgba(6,182,212,0.3)",
         }}>
           <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#06b6d4", animation: "pulse-dot 1.5s ease-in-out infinite" }} />
-          <span style={{ fontSize: 10, color: "#06b6d4", fontFamily: "'IBM Plex Mono', monospace", fontWeight: 600 }}>SPEAKING</span>
+          <span style={{ fontSize: 14, color: "#06b6d4", fontFamily: "'IBM Plex Mono', monospace", fontWeight: 600 }}>SPEAKING</span>
         </div>
       )}
     </div>
@@ -613,11 +613,11 @@ export default function SalesCoachAI() {
           {/* Transcript */}
           <div style={{ height: 200, borderTop: "1px solid rgba(51,65,85,0.3)", display: "flex", flexDirection: "column", flexShrink: 0 }}>
             <div style={{ padding: "10px 20px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid rgba(51,65,85,0.2)" }}>
-              <span style={{ fontSize: 10, color: "#64748b", fontWeight: 600, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.08em" }}>
+              <span style={{ fontSize: 14, color: "#64748b", fontWeight: 600, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.08em" }}>
                 📝 LIVE TRANSCRIPT
               </span>
               {transcripts.length > 0 && (
-                <span style={{ fontSize: 10, color: "#475569", fontFamily: "'IBM Plex Mono', monospace" }}>({transcripts.length})</span>
+                <span style={{ fontSize: 14, color: "#475569", fontFamily: "'IBM Plex Mono', monospace" }}>({transcripts.length})</span>
               )}
             </div>
             <div ref={transcriptRef} style={{ flex: 1, overflow: "auto", padding: "12px 20px", display: "flex", flexDirection: "column", gap: 8 }}>
@@ -632,8 +632,8 @@ export default function SalesCoachAI() {
                   }}>
                     {t.speaker === "rep" ? "REP" : "PROSPECT"}
                   </span>
-                  <span style={{ fontSize: 13, color: "#cbd5e1", lineHeight: 1.5 }}>{t.text}</span>
-                  <span style={{ fontSize: 11, color: "#475569", fontFamily: "'IBM Plex Mono', monospace", flexShrink: 0, paddingTop: 2 }}>
+                  <span style={{ fontSize: 16, color: "#cbd5e1", lineHeight: 1.5 }}>{t.text}</span>
+                  <span style={{ fontSize: 14, color: "#475569", fontFamily: "'IBM Plex Mono', monospace", flexShrink: 0, paddingTop: 2 }}>
                     {t.emotion}
                   </span>
                 </div>
@@ -653,14 +653,14 @@ export default function SalesCoachAI() {
             display: "flex", alignItems: "center", justifyContent: "space-between",
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ fontSize: 14 }}>🧠</span>
-              <span style={{ fontSize: 11, fontWeight: 700, color: "#94a3b8", letterSpacing: "0.08em", fontFamily: "'IBM Plex Mono', monospace" }}>
+              <span style={{ fontSize: 16 }}>🧠</span>
+              <span style={{ fontSize: 16, fontWeight: 700, color: "#94a3b8", letterSpacing: "0.08em", fontFamily: "'IBM Plex Mono', monospace" }}>
                 COACHING
               </span>
             </div>
             {coachingEvents.length > 0 && (
               <span style={{
-                fontSize: 11, color: "#06b6d4", fontWeight: 600,
+                fontSize: 14, color: "#06b6d4", fontWeight: 600,
                 fontFamily: "'IBM Plex Mono', monospace",
                 background: "rgba(6,182,212,0.1)", padding: "2px 8px", borderRadius: 10,
               }}>
@@ -699,13 +699,13 @@ export default function SalesCoachAI() {
                 display: "flex", alignItems: "center", gap: 6,
               }}>
                 <span style={{
-                  fontSize: 9, fontWeight: 600, color: "#475569",
+                  fontSize: 12, fontWeight: 600, color: "#475569",
                   letterSpacing: "0.08em", fontFamily: "'IBM Plex Mono', monospace",
                 }}>
                   HISTORY
                 </span>
                 <span style={{
-                  fontSize: 9, color: "#334155",
+                  fontSize: 12, color: "#334155",
                   fontFamily: "'IBM Plex Mono', monospace",
                 }}>
                   ({historyEvents.length})

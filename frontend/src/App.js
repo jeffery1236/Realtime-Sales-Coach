@@ -1,10 +1,9 @@
-// SWAP: comment/uncomment to toggle between live API demo and mock demo
-// import SalesCoachAI from './mock_demo_ui';
+import SalesCoachAI from './mock_demo_ui';
 import LiveDemoUI from './live_demo_ui';
 
 function App() {
-  // return <SalesCoachAI />;
-  return <LiveDemoUI />;
+  const mode = process.env.REACT_APP_MODE || 'mock';
+  return mode === 'live' ? <LiveDemoUI /> : <SalesCoachAI />;
 }
 
 export default App;
